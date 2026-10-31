@@ -1,2 +1,2 @@
-{"name":"Biblia Takatifu","short_name":"Biblia","description":"Biblia Takatifu - Swahili Union Version","start_url":"./","scope":"./","display":"standalone","background_color":"#f5f8f1","theme_color":"#3b6f24","lang":"sw",
+{"name":"Biblia Takatifu","short_name":"Biblia","description":"Biblia Takatifu - Swahili Union Version","start_url":"./","scope":"./","display":"standalone","background_color":"#f3f7f7","theme_color":"#e7eff0","lang":"sw",
  "icons":[{"src":"icons/icon-192.png","sizes":"192x192","type":"image/png"},{"src":"icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}

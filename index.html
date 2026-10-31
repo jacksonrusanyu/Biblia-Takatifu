@@ -5,27 +5,27 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Biblia Takatifu - Swahili Union Version</title>
 <meta name="description" content="Biblia Takatifu kwa Kiswahili (Swahili Union Version) - soma, tafuta, alamisha, bila internet.">
-<meta name="theme-color" content="#3b6f24">
+<meta name="theme-color" content="#e7eff0">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Biblia">
 <style>
-:root{--bg:#f5f8f1;--side:#e8f0e2;--card:#fbfdf8;--ink:#1f2a1c;--mute:#667060;--line:#d5e0cb;--acc:#3b6f24;--accsoft:#dcebd2;--blue:#2c77bd;--gold:#b58a2c;--sel:#dcefff;--target:#cfe8ff;
- --hl1:#fde68a;--hl2:#bbf7d0;--hl3:#bfdbfe;--hl4:#fbcfe8;--fs:20px;--lh:1.75;--read:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif}
-:root[data-theme=sepia]{--bg:#f1e7d0;--side:#e8dcc0;--card:#f8efd9;--ink:#3b2f20;--mute:#85745c;--line:#d9c9a6;--sel:#f3e1a6;--accsoft:#e5dcc4;--acc:#4f6b2a;--blue:#2f6a9e;--target:#f0dca0}
-:root[data-theme=dark]{--bg:#121a16;--side:#17211b;--card:#1c2720;--ink:#e5ece1;--mute:#97a291;--line:#2c3a30;--acc:#9bd67a;--accsoft:#22362a;--blue:#78c0f0;--gold:#d9b25c;--sel:#1f3a52;--target:#1d4466;
+:root{--bg:#f3f7f7;--side:#e7eff0;--card:#fbfdfd;--ink:#1c2a2e;--mute:#62757a;--line:#d3e0e1;--acc:#477f92;--accsoft:#dceaec;--blue:#3a7a90;--gold:#b58a2c;--sel:#e2eff1;--target:#d2e7ec;
+ --hl1:#fde68a;--hl2:#bbf7d0;--hl3:#bfdbfe;--hl4:#fbcfe8;--fs:19px;--lh:1.7;--read:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+:root[data-theme=sepia]{--bg:#f1e7d0;--side:#e8dcc0;--card:#f8efd9;--ink:#3b2f20;--mute:#85745c;--line:#d9c9a6;--sel:#f3e1a6;--accsoft:#e5dcc4;--acc:#5b7480;--blue:#3d6f85;--target:#f0dca0}
+:root[data-theme=dark]{--bg:#121a16;--side:#17211b;--card:#1c2720;--ink:#e5ece1;--mute:#97a291;--line:#2c3a30;--acc:#8cc7d6;--accsoft:#22362a;--blue:#8cc7d6;--gold:#d9b25c;--sel:#1f3a52;--target:#1d4466;
  --hl1:#6b5a17;--hl2:#1f5136;--hl3:#203e66;--hl4:#5c2848}
-:root[data-font=sans]{--read:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 *{box-sizing:border-box}
 html,body{height:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer}
-.app{display:grid;grid-template-columns:300px 1fr;height:100vh}
+.app{display:grid;grid-template-columns:1fr;height:100vh}
 /* ---------- sidebar */
-aside{background:var(--side);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+aside{background:var(--side);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;position:fixed;inset:0 auto 0 0;width:320px;max-width:88vw;z-index:50;transform:translateX(-100%);transition:transform .22s;box-shadow:0 0 40px rgba(0,0,0,.22)}
+aside.open{transform:none}
 .brand{padding:18px 18px 10px;display:flex;align-items:center;gap:10px}
 .brand img{width:34px;height:34px;border-radius:8px}
 .brand b{font:700 17px/1.1 var(--read)}
@@ -61,12 +61,14 @@ main{display:flex;flex-direction:column;min-width:0;min-height:0}
 .top::before{content:"";position:absolute;top:0;right:0;bottom:0;width:min(64%,640px);background:url(img/header.jpg) right 50%/cover no-repeat;
  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.35) 30%,#000 70%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.35) 30%,#000 70%);pointer-events:none}
 .top>*{position:relative;z-index:1}
+.top{transition:margin-top .25s ease}
+.fsbtn[hidden]{display:none}
 .top h1{font-size:22px!important}
 .top h1{font:600 19px/1.2 var(--read);margin:0;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ib{border:1px solid var(--line);background:var(--card);border-radius:9px;height:34px;min-width:34px;padding:0 10px;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:13px}
 .ib:hover{border-color:var(--acc)}
 .ib svg{width:16px;height:16px}
-.menu{display:none}
+.menu{display:inline-flex}
 .scroll{flex:1;overflow:auto;scroll-behavior:smooth}
 .page{max-width:760px;margin:0 auto;padding:34px 34px 120px}
 .chap-title{font:600 30px/1.2 var(--read);margin:0 0 4px}
@@ -85,7 +87,7 @@ main{display:flex;flex-direction:column;min-width:0;min-height:0}
 .navrow button:hover{color:var(--ink);border-color:var(--acc)}
 .navrow button:disabled{opacity:.35;cursor:default}
 /* selection bar */
-.selbar{position:fixed;left:50%;bottom:22px;transform:translateX(calc(-50% + 150px));background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.18);display:flex;align-items:center;gap:6px;padding:8px 10px;z-index:20}
+.selbar{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.18);display:flex;align-items:center;gap:6px;padding:8px 10px;z-index:20}
 .selbar[hidden]{display:none}
 .selbar .ref{font-weight:600;font-size:13px;padding:0 6px;white-space:nowrap}
 .dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--card);box-shadow:0 0 0 1px var(--line)}
@@ -126,8 +128,8 @@ kbd{font:11px -apple-system,sans-serif;border:1px solid var(--line);border-botto
  .selbar{transform:translateX(-50%)}
 }
 /* install guide */
-.inst{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
-:root[data-theme=dark] .inst{color:#0f2a2f}
+.inst{background:var(--accsoft);border-color:color-mix(in srgb,var(--acc) 45%,transparent);color:var(--acc);font-weight:600}
+:root[data-theme=dark] .inst{color:var(--acc)}
 #guide{position:fixed;inset:0;z-index:60;background:rgba(20,18,15,.5);display:flex;align-items:flex-end;justify-content:center}
 #guide[hidden]{display:none}
 #guide .box{background:var(--card);color:var(--ink);width:100%;max-width:520px;border-radius:18px 18px 0 0;padding:20px 20px calc(22px + env(safe-area-inset-bottom));box-shadow:0 -6px 30px rgba(0,0,0,.25)}
@@ -173,12 +175,12 @@ kbd{font:11px -apple-system,sans-serif;border:1px solid var(--line);border-botto
    <button class="ib" id="prev" aria-label="Sura iliyopita" title="Sura iliyopita (←)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
    <button class="ib" id="next" aria-label="Sura inayofuata" title="Sura inayofuata (→)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
    <button class="ib inst" id="instBtn" hidden title="Weka app kwenye kifaa hiki">⬇ <span>Weka app</span></button>
+   <button class="ib fsbtn" id="fsBtn" title="Skrini nzima" aria-label="Skrini nzima"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
    <button class="ib" id="setBtn" aria-label="Mpangilio" title="Mpangilio"><span style="font:600 15px var(--read)">Aa</span></button>
   </div>
   <div class="pop" id="pop" hidden>
    <h4>Ukubwa wa herufi</h4><input type="range" id="fs" min="15" max="32" step="1"><div style="height:12px"></div>
    <h4>Mwonekano</h4><div class="seg" id="themeSeg"><button data-v="light">Mwanga</button><button data-v="sepia">Sepia</button><button data-v="dark">Giza</button></div>
-   <h4>Herufi</h4><div class="seg" id="fontSeg"><button data-v="serif">Serif</button><button data-v="sans">Sans</button></div>
    <h4>Mpangilio wa mistari</h4><div class="seg" id="layoutSeg"><button data-v="lines">Mstari kwa mstari</button><button data-v="flow">Aya</button></div>
    <h4>Arifa ya Neno la Leo</h4><div class="seg" id="notifySeg"><button data-v="on">Washa</button><button data-v="off">Zima</button></div>
   </div>
@@ -214,7 +216,7 @@ const BIBLE = {"version":"Swahili Union Version (SUV)","books":[{"n":"Mwanzo","e
  };
  const S = {
   b: 0, c: 0, open: 0, vgrid: null, target: null, view: 'read', q: '', scope: 'all', shown: 200,
-  set: Object.assign({ fs: 20, theme: 'light', font: 'serif', layout: 'lines' }, store.get('settings', {})),
+  set: Object.assign({ fs: 20, theme: 'light', font: 'sans', layout: 'lines' }, store.get('settings', {})),
   bm: store.get('bookmarks', []), hl: store.get('highlights', {}), sel: new Set()
  };
  const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -229,14 +231,13 @@ const BIBLE = {"version":"Swahili Union Version (SUV)","books":[{"n":"Mwanzo","e
   r.style.setProperty('--fs', S.set.fs + 'px');
   r.dataset.theme = S.set.theme === 'light' ? '' : S.set.theme;
   if (S.set.theme === 'light') r.removeAttribute('data-theme');
-  r.dataset.font = S.set.font;
   $('fs').value = S.set.fs;
-  for (const [seg, k] of [['themeSeg', 'theme'], ['fontSeg', 'font'], ['layoutSeg', 'layout']])
+  for (const [seg, k] of [['themeSeg', 'theme'], ['layoutSeg', 'layout']])
    $(seg).querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === S.set[k]));
   store.set('settings', S.set);
  }
  $('fs').oninput = e => { S.set.fs = +e.target.value; applySettings(); };
- for (const [seg, k] of [['themeSeg', 'theme'], ['fontSeg', 'font'], ['layoutSeg', 'layout']])
+ for (const [seg, k] of [['themeSeg', 'theme'], ['layoutSeg', 'layout']])
   $(seg).onclick = e => { const b = e.target.closest('button'); if (!b) return; S.set[k] = b.dataset.v; applySettings(); if (k === 'layout' && S.view === 'read') renderChapter(); };
  $('setBtn').onclick = e => { e.stopPropagation(); $('pop').hidden = !$('pop').hidden; };
  document.addEventListener('click', e => { if (!$('pop').hidden && !e.target.closest('#pop')) $('pop').hidden = true; });
@@ -492,7 +493,7 @@ const BIBLE = {"version":"Swahili Union Version (SUV)","books":[{"n":"Mwanzo","e
    const g = cv.getContext('2d'), img = new Image(); img.src = SHARE_BG; await img.decode();
    g.drawImage(img, 0, 0, W, H);
    const grd = g.createLinearGradient(0, H - 260, 0, H); grd.addColorStop(0, 'rgba(0,0,0,0)'); grd.addColorStop(1, 'rgba(0,0,0,.45)'); g.fillStyle = grd; g.fillRect(0, H - 260, W, 260);
-   const serif = '"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif', x = 90, w = W - 180, pad = 64;
+   const serif = '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif', x = 90, w = W - 180, pad = 64;
    let fs = 58, lines;
    const wrap = () => { g.font = `${fs}px ${serif}`; const out = []; let cur = '';
     for (const word of ('“' + text + '”').split(/\s+/)) { const t = cur ? cur + ' ' + word : word; if (g.measureText(t).width > w - 2 * pad && cur) { out.push(cur); cur = word; } else cur = t; }
@@ -503,7 +504,7 @@ const BIBLE = {"version":"Swahili Union Version (SUV)","books":[{"n":"Mwanzo","e
    g.fillStyle = 'rgba(250,252,246,.74)'; g.beginPath(); g.roundRect(x, y, w, ph, 36); g.fill();
    g.fillStyle = '#1f2a1c'; g.textBaseline = 'alphabetic';
    lines.forEach((l, i) => g.fillText(l, x + pad, y + pad + fs + i * lh));
-   g.font = '700 40px -apple-system,"Segoe UI",Roboto,sans-serif'; g.fillStyle = '#3b6f24';
+   g.font = '700 40px -apple-system,"Segoe UI",Roboto,sans-serif'; g.fillStyle = '#2f6f86';
    g.fillText(label, x + pad, y + ph - pad + 6);
    g.font = '600 30px -apple-system,"Segoe UI",Roboto,sans-serif'; g.fillStyle = 'rgba(255,255,255,.96)'; g.textAlign = 'center';
    g.fillText('Biblia Takatifu · Swahili Union Version', W / 2, H - 56);
@@ -536,6 +537,22 @@ const BIBLE = {"version":"Swahili Union Version (SUV)","books":[{"n":"Mwanzo","e
   return false;
  }
  window.addEventListener('hashchange', fromHash);
+ /* ---------------- full screen + hide the top bar while reading (computer and phone alike) */
+ const top = document.querySelector('.top');
+ let lastY = 0;
+ $('scroll').addEventListener('scroll', () => {
+  const y = $('scroll').scrollTop, d = y - lastY; lastY = y;
+  if (y > 140 && d > 6) top.style.marginTop = -top.offsetHeight + 'px';
+  else if (d < -6 || y < 60) top.style.marginTop = '0px';
+ }, { passive: true });
+ const fsOk = !!(document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen);
+ $('fsBtn').hidden = !fsOk;
+ $('fsBtn').onclick = () => {
+  const d = document, el = d.documentElement;
+  if (d.fullscreenElement || d.webkitFullscreenElement) (d.exitFullscreen || d.webkitExitFullscreen).call(d);
+  else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+ };
+ document.addEventListener('keydown', e => { if (e.key.toLowerCase() === 'f' && !e.metaKey && !e.ctrlKey && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) $('fsBtn').click(); });
  applySettings(); updateNotifySeg(); votd();
  if (store.get('votdDay', '') !== dayKey()) { store.set('votdDay', dayKey()); setTimeout(() => { showVotdSheet(); notifyVotd(); }, 400); }
  if (!fromHash()) { const p = store.get('pos', [0, 0]); go(p[0], p[1]); }
